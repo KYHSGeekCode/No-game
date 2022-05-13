@@ -1,0 +1,49 @@
+[Version]
+Signature="$WINDOWS NT$"
+Class=Hajesoft
+ClassGuid = {cfb15040-5bc7-11d3-b194-0060b0efd334}
+Provider="Hajesoft, Inc."
+
+[SourceDisksNames]
+1=%DiskId%
+
+[SourceDisksFiles]
+SAMPLE5.sys=1
+
+[ClassInstall32]
+Addreg=AddHwClass
+
+[AddHwClass]
+HKR,,,,%ClassName%
+HKR,,Icon,,"-5"
+
+[DestinationDirs]
+DefaultDestDir=12
+
+[Manufacturer]
+%Mfg%=MfgDeviceSection
+
+[MfgDeviceSection]
+%DeviceDesc% = HajeSample, HAJESOFT_VIRTUAL_SAMPLE5_DEVICE
+
+[HajeSample]
+CopyFiles=@SAMPLE5.sys
+
+[HajeSample.Services]
+AddService = SAMPLE5,%SPSVCINST_ASSOCSERVICE%,Haje_Service_Inst
+
+[Haje_Service_Inst]
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_MANUAL_START%
+ErrorControl   = %SERVICE_ERROR_NORMAL%
+ServiceBinary  = %12%\SAMPLE5.sys 
+
+[Strings]
+ClassName 	= "Hajesoft"
+DeviceDesc 	= "Hajesoft Sample Driver"
+DiskId 		= Sample Install Disk 1"
+Mfg = "Hajesoft, Inc."
+SPSVCINST_ASSOCSERVICE = 0x00000002
+SERVICE_KERNEL_DRIVER  = 1
+SERVICE_MANUAL_START    = 3
+SERVICE_ERROR_NORMAL  = 1
